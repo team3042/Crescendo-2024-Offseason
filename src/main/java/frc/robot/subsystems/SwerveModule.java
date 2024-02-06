@@ -19,6 +19,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.RobotController;
 
 public class SwerveModule {
 
@@ -47,7 +48,7 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANcoder(absoluteEncoderId);
 
-        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
+        absoluteEncoder.configGetMagnetOffset(absoluteEncoderOffsetDegrees);
 
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -99,7 +100,8 @@ public class SwerveModule {
     // Get the absolute position of the module in radians
     public double getAbsoluteEncoderRadians() {
         double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
-        angle *= (Math.PI / 180); // Convert degrees to radians
+        angle *= 2.0 * Math.PI;
+        angle -= absoluteEncoderOffsetDegrees;
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
 
