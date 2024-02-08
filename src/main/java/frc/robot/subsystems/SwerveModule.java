@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.RobotMap;
 
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 
 import com.revrobotics.CANSparkMax;
@@ -48,7 +49,10 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANcoder(absoluteEncoderId);
 
-        absoluteEncoder.configGetMagnetOffset(absoluteEncoderOffsetDegrees);
+        CANcoderConfiguration config = new CANcoderConfiguration();
+config.MagnetSensor.MagnetOffset = absoluteEncoderOffset;
+// more configurations
+absoluteEncoder.getConfigurator().apply(config);
 
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -99,7 +103,7 @@ public class SwerveModule {
 
     // Get the absolute position of the module in radians
     public double getAbsoluteEncoderRadians() {
-        double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
+        double angle = absoluteEncoder.getAbsolutePosition().getValueAsDouble(); // Gets the absolute position in degrees
         angle *= 2.0 * Math.PI;
         angle -= absoluteEncoderOffsetDegrees;
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
