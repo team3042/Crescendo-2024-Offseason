@@ -1,4 +1,4 @@
-package frc;
+package frc.robot;
 
 import edu.wpi.first.math.util.Units;
 import frc.lib.Log;
@@ -78,38 +78,12 @@ public class RobotMap {
     public static final int steerCurrentLimit = 20;
 
 	/** Intake Subsystem Settings */
-	public static final boolean rotationMotorReversed = false;
-    public static final boolean extendMotorReversed = false;
-	public static final double rotationThreshold = 50;
-	public static final double extensionThreshold = 80;
-	public static final double rotation_kP = 0.02;
-	public static final double extension_kP = 0.0005;
-	public static final int maxArmLength = 15200; // Measured in encoder counts
+	public static final boolean intakeMotorReversed = false;
+    public static final boolean flipMotorReversed = false;
+	public static final double intakeThreshold = 50;
+	public static final double flipThreshold = 80;
 	public static final double shoulderCountsPerDegree = 11.666667;
-	public static final double armStartingDegrees = 7.5; // measured in degrees
-	public static final double levelVoltageRetracted = 0.3115; // Adjust this if needed 
-	public static final double levelVoltageExtended = 0.5; // Adjust this if needed
-	public static final double coneAmp = 20; //TODO: tune value
 
-	/** Arm/Extension Positions */
-	// Intake from the floor // 
-	public static final double kIntakeArmPosition = 190; // measured in encoder counts
-	public static final double kIntakeExtendPosition = 0.45; // measured in % of extension
-	// Middle goal //
-	public static final double kMidArmPosCone = 900; // measured in encoder counts
-	public static final double kScoringExtendPosition1 = 0.42; // measured in % of extension
-	// Upper goal
-	public static final double kHighArmPosCone = 1020; // measured in encoder counts
-	public static final double kScoringExtendPosition2 = 0.95; // measured in % of extension
-	// Intake from the shelf
-	public static final double kShelfIntakeArmPosition = 825; // measured in encoder counts
-	public static final double kShelfIntakeExtendPosition = 0.20; // measured in % of extension
-	// Driving around
-	public static final double kArmDrivePosition = 50; // measured in encoder counts
-	public static final double kExtendDrivePosition = 0.02; // measured in % of extension
-
-	public static final double kArmDefensePosition = 10; // measured in encoder counts
-	public static final double kExtendDefensePosition = 0.01; // measured in % of extension
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.07;

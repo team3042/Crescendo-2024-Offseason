@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import frc.RobotMap;
+import frc.robot.RobotMap;
 
 public class Log {
 	/** Configuration Constants ***********************************************/

@@ -1,21 +1,33 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
+//hi this is yuji i shat myself
 
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.lib.Log;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  private static final Log.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
+	private Log log = new Log(LOG_LEVEL, "Robot");
+
+  public static final Drivetrain drivetrain = new Drivetrain();
+  public static final Intake intake = new Intake();
+  public static final Laucher laucher = new Laucher();
+  
+
+  private OI m_robotContainer;
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    m_robotContainer = new OI();
   }
 
   @Override
