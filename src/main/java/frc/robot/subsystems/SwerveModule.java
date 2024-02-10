@@ -22,7 +22,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.RobotController;
 
-public class SwerveModule {
+public class SwerveModule extends SubsystemBase{
 
     private static final double kDriveEncoderRot2Meter = RobotMap.kDriveEncoderRot2Meter;
     private static final double kDriveEncoderRPM2MeterPerSec = RobotMap.kDriveEncoderRPM2MeterPerSec;

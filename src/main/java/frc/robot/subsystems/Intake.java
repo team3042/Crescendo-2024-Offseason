@@ -38,14 +38,19 @@ public class Intake extends SubsystemBase {
     intakeMotor.setInverted(RobotMap.intakeMotorReversed);
     flipMotor.setInverted(RobotMap.flipMotorReversed);
 
-    intakeMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCOast or kBrake affect shooter power
-    flipMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCOast or kBrake affect shooter power
+    intakeMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCoast or kBrake affect shooter power
+    flipMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCoast or kBrake affect shooter power
 
     intakeMotor.getEncoder().setPositionConversionFactor(42);
     flipMotor.getEncoder().setPositionConversionFactor(42);
 
   }
 
+  public void intakeSpin(double speed) {
+    intakeMotor.set(speed);
+  }
+
+  
 
   @Override
   public void periodic() {
