@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.Log;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Launcher;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -20,7 +21,7 @@ public class Robot extends TimedRobot {
 
   public static final Drivetrain drivetrain = new Drivetrain();
   public static final Intake intake = new Intake();
-  public static final Laucher laucher = new Laucher();
+  public static final Launcher launcher = new Launcher();
   
 
   private OI m_robotContainer;

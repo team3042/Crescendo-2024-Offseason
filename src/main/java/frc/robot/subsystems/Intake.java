@@ -50,7 +50,16 @@ public class Intake extends SubsystemBase {
     intakeMotor.set(speed);
   }
 
-  
+  public void flipIntake(double speed) {
+
+    while(flipLimitSwitch.get() == false) {
+      flipMotor.set(speed);
+    }
+    flipMotor.set(0);
+    
+  }
+
+
 
   @Override
   public void periodic() {
