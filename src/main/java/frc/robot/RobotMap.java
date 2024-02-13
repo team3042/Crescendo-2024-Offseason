@@ -82,7 +82,13 @@ public class RobotMap {
     public static final boolean flipMotorReversed = false;
 	public static final double intakeThreshold = 50;
 	public static final double flipThreshold = 80;
-	public static final double shoulderCountsPerDegree = 11.666667;
+	public static final double flipSpeed = 0.4;
+	public static final double intakeSpeed = 0.4;
+
+	/** Shooter Subsystem Settings */
+
+	public static final double shooterSpeed = 0.8;
+
 
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
@@ -93,10 +99,6 @@ public class RobotMap {
 	public static final int USB_JOYSTICK_LEFT 	= 0;
 	public static final int USB_JOYSTICK_RIGHT 	= 1;
 	public static final int USB_GAMEPAD 		= 2;
-	
-	/** PCM (Pneumatics Control Module) Channels ******************************/
-	public static final int Gripper_PistonID1 = 0;
-	public static final int Gripper_PistonID2 = 1;
 
 	/** Logger Settings *******************************************************/
 	public static final String 		LOG_FILE_FORMAT 					= "yyyy-MM-dd-hhmmss";

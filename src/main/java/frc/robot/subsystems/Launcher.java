@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Launcher extends SubsystemBase {
@@ -39,4 +40,18 @@ public class Launcher extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void startShooter() {
+    Robot.intake.flipIntakeUp();
+    Robot.intake.shooterIntakeSpin();
+    leftShooterMotor.set(RobotMap.shooterSpeed);
+    rightShooterMotor.set(RobotMap.shooterSpeed);
+  }
+
+  public void stopShooter() {
+
+    leftShooterMotor.set(0);
+    rightShooterMotor.set(0);
+  }
+
 }

@@ -17,11 +17,20 @@ public class FlipIntake extends InstantCommand {
   public FlipIntake() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.intake);
-
-	
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
+
+  @Override
+  public void execute() {
+    
+    Robot.intake.flipIntakeUp();
+  }
+
+
 }
+
+
+

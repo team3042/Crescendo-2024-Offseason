@@ -1,6 +1,9 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
+//q: explain the purpose of the code in this class
+ 
+
 
 package frc.robot.subsystems;
 
@@ -12,6 +15,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -19,6 +23,7 @@ public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
     private final CANSparkMax flipMotor;
+    Timer timer = new Timer();
 
     public final DigitalInput flipLimitSwitch;
 
@@ -43,24 +48,45 @@ public class Intake extends SubsystemBase {
 
     intakeMotor.getEncoder().setPositionConversionFactor(42);
     flipMotor.getEncoder().setPositionConversionFactor(42);
-
-  }
-
-  public void intakeSpin(double speed) {
-    intakeMotor.set(speed);
-  }
-
-  public void flipIntake(double speed) {
-
-    while(flipLimitSwitch.get() == false) {
-      flipMotor.set(speed);
-    }
-    flipMotor.set(0);
     
   }
 
+  public void intakeSpin() { 
+    intakeMotor.set(0.5); //TODO: might need changing, how fast intake runs!!
+  }
 
+  public void stopIntakeSpin() {
+    intakeMotor.set(0);
+  }
 
+  public void shooterIntakeSpin() {
+    intakeMotor.set(-0.1);
+    timer.hasElapsed(0.2);
+    intakeMotor.set(0);
+  }
+
+  public void flipIntakeUp() {
+
+    intakeMotor.set(0);
+    if(flipLimitSwitch.get() == false) {
+
+      flipMotor.set(RobotMap.flipSpeed); //TODO: edit, maybe reverse?
+    }
+    
+  }
+
+    public void flipIntakeDown() {
+
+      while(flipMotor.getEncoder().getPosition() > 0) {
+         
+        flipMotor.set(RobotMap.flipSpeed); //TODO: edit, maybe reverse?
+      }
+
+    intakeMotor.set(0.5);
+    
+  }
+
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
