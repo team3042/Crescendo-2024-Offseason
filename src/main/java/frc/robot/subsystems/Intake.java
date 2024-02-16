@@ -23,19 +23,21 @@ public class Intake extends SubsystemBase {
 
     private final CANSparkMax intakeMotor;
     private final CANSparkMax flipMotor;
+
     Timer timer = new Timer();
 
     public final DigitalInput flipLimitSwitch;
+    public final DigitalInput intakeLimitSwitch;
 
 
   /** Creates a new Intake. */
   public Intake() {
-
     
     intakeMotor = new CANSparkMax(RobotMap.kIntakeMotorPort, MotorType.kBrushless);
     flipMotor = new CANSparkMax(RobotMap.kIntakeFlipPort, MotorType.kBrushless);
     
     flipLimitSwitch = new DigitalInput(0);
+    intakeLimitSwitch = new DigitalInput(1);
 
     intakeMotor.restoreFactoryDefaults();
     flipMotor.restoreFactoryDefaults();
@@ -51,41 +53,38 @@ public class Intake extends SubsystemBase {
     
   }
 
-  public void intakeSpin() { 
-    intakeMotor.set(0.5); //TODO: might need changing, how fast intake runs!!
+  public double getFlipMotorPosition() {
+
+    return flipMotor.getEncoder().getPosition();
+  }
+
+  public void resetEncoders() {
+      
+      intakeMotor.getEncoder().setPosition(0);
+      flipMotor.getEncoder().setPosition(0);
+  }
+
+  public void setIntakeSpeed(double percentPower) { 
+
+    if (intakeLimitSwitch.get()) {
+
+      stopIntakeSpin();
+    }
+    else {
+
+      intakeMotor.set(percentPower); //TODO: might need changing, depending on how fast intake runs!!
+    }
   }
 
   public void stopIntakeSpin() {
     intakeMotor.set(0);
   }
 
-  public void shooterIntakeSpin() {
-    intakeMotor.set(-0.1);
-    timer.hasElapsed(0.2);
-    intakeMotor.set(0);
+  public double getFlipperAngle(){
+
+    //TODO: finish this method when we get the robot
+    return 0;
   }
-
-  public void flipIntakeUp() {
-
-    intakeMotor.set(0);
-    if(flipLimitSwitch.get() == false) {
-
-      flipMotor.set(RobotMap.flipSpeed); //TODO: edit, maybe reverse?
-    }
-    
-  }
-
-    public void flipIntakeDown() {
-
-      while(flipMotor.getEncoder().getPosition() > 0) {
-         
-        flipMotor.set(RobotMap.flipSpeed); //TODO: edit, maybe reverse?
-      }
-
-    intakeMotor.set(0.5);
-    
-  }
-
   
   @Override
   public void periodic() {

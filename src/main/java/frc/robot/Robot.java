@@ -5,10 +5,18 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.Log;
+import frc.robot.commands.DriveCommand;
+import frc.robot.commands.autonomous.AutonomousMode_Default;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
@@ -19,16 +27,39 @@ public class Robot extends TimedRobot {
   private static final Log.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
 	private Log log = new Log(LOG_LEVEL, "Robot");
 
+
+  /** Creating  Subsystems ********************************************/
   public static final Drivetrain drivetrain = new Drivetrain();
   public static final Intake intake = new Intake();
   public static final Launcher launcher = new Launcher();
+  public static final Climber climber = new Climber();
   
+  UsbCamera camera1;
 
-  private OI m_robotContainer;
+  public static final OI oi = new OI();
+
+
+  SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   @Override
   public void robotInit() {
-    m_robotContainer = new OI();
+    
+    log.add("Robot Init", Log.Level.TRACE);
+    drivetrain.setDefaultCommand(new DriveCommand());
+
+    drivetrain.zeroGyro();
+    //TODO: reset encoders for all subsystems
+
+
+    /* Autonomous Routines */
+
+    chooser.setDefaultOption("Default", new AutonomousMode_Default());
+    //add more auto options here
+    SmartDashboard.putData(chooser);
+
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera1.setResolution(320, 240);
+    camera1.setFPS(15);
   }
 
   @Override
@@ -47,7 +78,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = oi.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

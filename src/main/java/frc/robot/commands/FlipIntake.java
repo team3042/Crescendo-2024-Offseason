@@ -26,7 +26,7 @@ public class FlipIntake extends InstantCommand {
   @Override
   public void execute() {
     
-    Robot.intake.flipIntakeUp();
+    Robot.intake.flipIntake();
   }
 
 

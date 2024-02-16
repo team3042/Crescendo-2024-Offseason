@@ -41,17 +41,17 @@ public class Launcher extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void startShooter() {
-    Robot.intake.flipIntakeUp();
-    Robot.intake.shooterIntakeSpin();
-    leftShooterMotor.set(RobotMap.shooterSpeed);
-    rightShooterMotor.set(RobotMap.shooterSpeed);
-  }
+  // public void startShooter() {
+  //   Robot.intake.flipIntakeUp();
+  //   Robot.intake.shooterIntakeSpin();
+  //   leftShooterMotor.set(RobotMap.shooterSpeed);
+  //   rightShooterMotor.set(RobotMap.shooterSpeed);
+  // }
 
-  public void stopShooter() {
+  // public void stopShooter() {
 
-    leftShooterMotor.set(0);
-    rightShooterMotor.set(0);
-  }
+  //   leftShooterMotor.set(0);
+  //   rightShooterMotor.set(0);
+  // }
 
 }
