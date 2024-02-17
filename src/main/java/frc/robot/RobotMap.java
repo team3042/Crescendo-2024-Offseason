@@ -10,8 +10,8 @@ public class RobotMap {
 
 	/** CAN ID numbers ********************************************************/
 	
-    public static final int kLeftShooterMotorPort = 1; //TODO: Find out how to connect and use pwm for motor
-    public static final int kRightShooterMotorPort = 2; //TODO: Find out how to connect and use pwm for motor
+    public static final int kLeftShooterMotorPort = 19; //TODO: Find out how to connect and use pwm for motor
+    public static final int kRightShooterMotorPort = 20; //TODO: Find out how to connect and use pwm for motor
 	public static final int kFrontLeftDriveAbsoluteEncoderPort = 1;
 	public static final int kFrontRightDriveAbsoluteEncoderPort = 2;
 	public static final int kBackLeftDriveAbsoluteEncoderPort = 3;
