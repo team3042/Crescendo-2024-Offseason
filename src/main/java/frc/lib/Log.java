@@ -7,6 +7,8 @@ import java.util.TimeZone;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.RobotMap;
 
+import frc.lib.Log;
+
 public class Log {
 	/** Configuration Constants ***********************************************/
 	private static final boolean USE_CONSOLE = RobotMap.LOG_TO_CONSOLE;

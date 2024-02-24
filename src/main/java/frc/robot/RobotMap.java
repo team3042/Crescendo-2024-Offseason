@@ -32,39 +32,38 @@ public class RobotMap {
     public static final int kRightHangMotor = 18;
 
 
-
 	/** Drivetrain Settings ***************************************************/
-	public static final double kP_X_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
-    public static final double kP_Y_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following	
-    public static final double kP_THETA_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
+	public static final double kP_X_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
+    public static final double kP_Y_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following	
+    public static final double kP_THETA_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
 	
-    public static final boolean kFrontLeftDriveEncoderReversed = false;
+    public static final boolean kFrontLeftDriveEncoderReversed = true;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
 	public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = -87.4; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 0.436523; // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kFrontRightDriveEncoderReversed = false;
+    public static final boolean kFrontRightDriveEncoderReversed = true;
     public static final boolean kFrontRightTurningEncoderReversed = false;
 	public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = 54.5; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = -0.264893; // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kBackLeftDriveEncoderReversed = false;
+    public static final boolean kBackLeftDriveEncoderReversed = true;
 	public static final boolean kBackLeftTurningEncoderReversed = false;
 	public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = 153.77; //155 // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = 0.004883; //155 // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kBackRightDriveEncoderReversed = false;
+    public static final boolean kBackRightDriveEncoderReversed = true;
     public static final boolean kBackRightTurningEncoderReversed = false;
 	public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
-    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 107.0; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 0.082275; // More negative turns wheel more to the left (counter-clockwise)
 
 	
-	public static final double JOYSTICK_DRIVE_SCALE = 0.7; // Determines the max driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE = 0.6; // Determines the max driving speed of the robot
 	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
 
 	/** Swerve Module Settings ************************************************/
 	public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // Convert wheel diameter in inches to meters
-	public static final double kDriveMotorGearRatio = 1 / 6.75; // Gear Ratio of the Drive Motor
+	public static final double kDriveMotorGearRatio = 1 / 8.14; // Gear Ratio of the Drive Motor
 	public static final double kTurnMotorGearRatio = 1 / 12.8; // Gear Ratio of the Turning Motor
 	public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters; // Convert rotations to meters
 	public static final double kTurningEncoderRot2Rad = kTurnMotorGearRatio * 2 * Math.PI; // Convert rotations to radians

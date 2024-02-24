@@ -71,7 +71,16 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    SmartDashboard.putNumber("FrontLeft Abs Encoder Counts", drivetrain.getFrontLeft().getAbsoluteEncoderRadians() * Math.PI);
+    SmartDashboard.putNumber("FrontRight Abs Encoder Counts", drivetrain.getFrontRight().getAbsoluteEncoderRadians() * Math.PI);
+    SmartDashboard.putNumber("BackLeft Abs Encoder Counts", drivetrain.getBackLeft().getAbsoluteEncoderRadians() * Math.PI);
+    SmartDashboard.putNumber("BackRight Abs Encoder Counts", drivetrain.getBackRight().getAbsoluteEncoderRadians() * Math.PI);
+    SmartDashboard.putString("BL State", drivetrain.getBackLeft().getState().toString());
+    SmartDashboard.putString("BR State", drivetrain.getBackRight().getState().toString());
+    SmartDashboard.putString("FL State", drivetrain.getFrontLeft().getState().toString());
+    SmartDashboard.putString("FR State", drivetrain.getFrontRight().getState().toString());
+  }
 
   @Override
   public void disabledExit() {}

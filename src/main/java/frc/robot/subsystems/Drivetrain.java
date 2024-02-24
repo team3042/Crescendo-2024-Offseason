@@ -122,6 +122,7 @@ public class Drivetrain extends SubsystemBase {
 	@Override
 	public void periodic() {
 		SmartDashboard.putNumber("Gyro Angle", pitchAngle()); // The current gyroscope angle
+
 		// This is for autonomous path-following
 		odometry.update(getRotation2d(), new SwerveModulePosition[] {frontLeft.getPosition(),
 																	frontRight.getPosition(),
