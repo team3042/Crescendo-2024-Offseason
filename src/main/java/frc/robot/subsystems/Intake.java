@@ -50,6 +50,8 @@ public class Intake extends SubsystemBase {
 
     intakeMotor.getEncoder().setPositionConversionFactor(42);
     flipMotor.getEncoder().setPositionConversionFactor(42);
+
+
     
   }
 
@@ -79,6 +81,36 @@ public class Intake extends SubsystemBase {
   public void stopIntakeSpin() {
     intakeMotor.set(0);
   }
+
+  public void intakeSpin() {
+    intakeMotor.set(0.5);
+  }
+
+  public void flipIntakeUp() {
+
+    if (flipLimitSwitch.get()) {
+
+      flipMotor.set(0);
+    }
+    else {
+
+      flipMotor.set(0.5);
+    }
+  }
+
+  public void flipIntakeDown() {
+
+    if (flipLimitSwitch.get()) {
+
+      flipMotor.set(0);
+    }
+    else {
+
+      flipMotor.set(-0.5);
+    }
+  }
+
+
 
   public double getFlipperAngle(){
 
