@@ -7,13 +7,10 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,8 +33,8 @@ public class Intake extends SubsystemBase {
     intakeMotor = new CANSparkMax(RobotMap.kIntakeMotorPort, MotorType.kBrushless);
     flipMotor = new CANSparkMax(RobotMap.kIntakeFlipPort, MotorType.kBrushless);
     
-    flipLimitSwitch = new DigitalInput(0);
-    intakeLimitSwitch = new DigitalInput(1);
+    flipLimitSwitch = new DigitalInput(9);
+    intakeLimitSwitch = new DigitalInput(7);
 
     intakeMotor.restoreFactoryDefaults();
     flipMotor.restoreFactoryDefaults();
