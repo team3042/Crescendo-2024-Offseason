@@ -83,28 +83,10 @@ public class Intake extends SubsystemBase {
     intakeMotor.set(0.5);
   }
 
-  public void flipIntakeUp() {
+  public void flipIntake(double position) {
 
-    if (flipLimitSwitch.get()) {
-
-      flipMotor.set(0);
-    }
-    else {
-
-      flipMotor.set(0.5);
-    }
-  }
-
-  public void flipIntakeDown() {
-
-    if (flipLimitSwitch.get()) {
-
-      flipMotor.set(0);
-    }
-    else {
-
-      flipMotor.set(-0.5);
-    }
+    flipMotor.getEncoder().setPosition(position);
+    
   }
 
 

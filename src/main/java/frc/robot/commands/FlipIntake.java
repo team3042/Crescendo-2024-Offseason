@@ -14,9 +14,15 @@ import frc.robot.Robot;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class FlipIntake extends InstantCommand {
 
-  public FlipIntake() {
+  boolean toggle = false;
+  double intakePosition = 0;
+
+  public FlipIntake(double position) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.intake);
+
+    intakePosition = position;
+
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +32,7 @@ public class FlipIntake extends InstantCommand {
   @Override
   public void execute() {
     
-    // Robot.intake.flipIntake();
+    Robot.intake.flipIntake(intakePosition);
   }
 
 
