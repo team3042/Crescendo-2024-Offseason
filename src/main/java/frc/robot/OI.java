@@ -34,8 +34,8 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new InstantCommand(Robot.drivetrain::zeroGyro, Robot.drivetrain)); // Zero the gyro, this is helpful at the start of a match for field-oriented driving
 		new Trigger(() -> driverController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Drivetrain_XStance()); // Defensive X-stance command
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new FlipIntake(0.5));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new FlipIntake(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new FlipIntake(0.5)); //TODO: Find
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new FlipIntake(0)); //TODO: Find
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new InstantCommand(Robot.launcher::startShooter, Robot.launcher));
     	new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new InstantCommand(Robot.launcher::stopShooter, Robot.launcher));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new SpinIntakeToggleMaker());

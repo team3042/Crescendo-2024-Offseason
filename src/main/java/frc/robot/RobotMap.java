@@ -79,8 +79,8 @@ public class RobotMap {
 	/** Intake Subsystem Settings */
 	public static final boolean intakeMotorReversed = false;
     public static final boolean flipMotorReversed = false;
-	public static final double intakeThreshold = 50;
-	public static final double flipThreshold = 80;
+	public static final double kIntakeThreshold = 50;
+	public static final double kFlipThreshold = 80;
 	public static final double flipSpeed = 0.4;
 	public static final double intakeSpeed = 0.4;
 	public static final double flipperThreshold = 0;
