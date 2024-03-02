@@ -80,6 +80,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("BR State", drivetrain.getBackRight().getState().toString());
     SmartDashboard.putString("FL State", drivetrain.getFrontLeft().getState().toString());
     SmartDashboard.putString("FR State", drivetrain.getFrontRight().getState().toString());
+
+    Robot.intake.resetEncoders();
   }
 
   @Override

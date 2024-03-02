@@ -4,13 +4,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.Intake;
 
 public class Flipper_SetPosition extends Command {
-
-  Intake intake = new Intake();
 
   public double FlipperGoal;
   public double FlipPositionError;
@@ -18,7 +17,7 @@ public class Flipper_SetPosition extends Command {
   /** Creates a new Flipper_SetPosition. */
   public Flipper_SetPosition(double flipperGoal) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(Robot.intake);
 
     FlipperGoal = flipperGoal;
   }
@@ -31,10 +30,18 @@ public class Flipper_SetPosition extends Command {
   @Override
   public void execute() {
 
-    FlipPositionError = FlipperGoal - intake.getFlipMotorPosition();
-
+    FlipPositionError = FlipperGoal - Robot.intake.getFlipMotorPosition();
     boolean flipGoalReached = Math.abs(FlipPositionError) < RobotMap.flipperThreshold;
+    
+    if(Robot.intake.flipLimitSwitch.get() || flipGoalReached){
+      Robot.intake.setFlipperPower(0);
+    } else{
 
+      Robot.intake.setFlipperPower(Math.copySign(0.5, FlipPositionError));
+    }
+
+    SmartDashboard.putNumber("Flipper Position Goal: ", FlipperGoal);
+    SmartDashboard.putNumber("Flipper Position Actual: ", Robot.intake.getFlipMotorPosition());
     
   }
 

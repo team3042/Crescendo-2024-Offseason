@@ -7,14 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class SpinIntakeToggleMaker extends Command {
+public class Intake_SetPower extends Command {
 
-  boolean toggle = false;
+  double power;
 
   /** Creates a new IntakeToggleMaker. */
-  public SpinIntakeToggleMaker() {
+  public Intake_SetPower(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.intake);
+    power = speed;
   }
 
   // Called when the command is initially scheduled.
@@ -25,12 +26,11 @@ public class SpinIntakeToggleMaker extends Command {
   @Override
   public void execute() {
 
-    if (toggle) {
-      Robot.intake.intakeSpin();
-      toggle = false;
+    if(Robot.intake.intakeLimitSwitch.get() && power > 0){
+      Robot.intake.intakeSpin(0);
     } else {
-      Robot.intake.stopIntakeSpin();
-      toggle = true;
+      
+      Robot.intake.intakeSpin(power);
     }
   }
 

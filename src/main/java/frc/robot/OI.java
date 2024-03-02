@@ -5,9 +5,10 @@
 package frc.robot;
 
 import frc.lib.Log;
-import frc.robot.commands.Drivetrain_XStance;
-import frc.robot.commands.FlipIntake;
-import frc.robot.commands.SpinIntakeToggleMaker;
+import frc.robot.commands.Drivetrain_XStance;    
+import frc.robot.commands.Flipper_SetPosition;
+import frc.robot.commands.Intake_SetPower;
+import frc.robot.commands.Launcher_SetPower;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -34,13 +35,19 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new InstantCommand(Robot.drivetrain::zeroGyro, Robot.drivetrain)); // Zero the gyro, this is helpful at the start of a match for field-oriented driving
 		new Trigger(() -> driverController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Drivetrain_XStance()); // Defensive X-stance command
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new FlipIntake(0.5)); //TODO: Find
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new FlipIntake(0)); //TODO: Find
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new InstantCommand(Robot.launcher::startShooter, Robot.launcher));
-    	new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new InstantCommand(Robot.launcher::stopShooter, Robot.launcher));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new SpinIntakeToggleMaker());
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new InstantCommand(Robot.intake::stopIntakeSpin, Robot.intake));
-	}
+	
+		/* Intake actions */
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(180)); //TODO: Find
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0)); //TODO: Find
+		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.5));
+		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.5));
+		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(0));
+
+	/*Launcher actions */
+		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0.6));
+		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.B_BUTTON)).onTrue(new Intake_SetPower(0));
+	} 
  
   public void setNormalScale() {
 		CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;

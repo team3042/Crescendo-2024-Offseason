@@ -65,26 +65,28 @@ public class Intake extends SubsystemBase {
       flipMotor.getEncoder().setPosition(0);
   }
 
-  public void setIntakeSpeed(double percentPower) { 
+  // should be a command
+  //public void setIntakeSpeed(double percentPower) { 
 
-    if (intakeLimitSwitch.get()) {
+  //   if (intakeLimitSwitch.get()) {
 
-      stopIntakeSpin();
-    }
-    else {
+  //     stopIntakeSpin();
+  //   }
+  //   else {
 
-      intakeMotor.set(percentPower); //TODO: might need changing, depending on how fast intake runs!!
-    }
-  }
+  //     intakeMotor.set(percentPower); //TODO: might need changing, depending on how fast intake runs!!
+  //   }
+  // }
 
   public void stopIntakeSpin() {
 
     intakeMotor.set(0);
   }
 
-  public void intakeSpin() {
-    intakeMotor.set(0.5);
+  public void intakeSpin(double speed) {
+    intakeMotor.set(speed);
   }
+
 
   public void setFlipperPower(double power){
   
