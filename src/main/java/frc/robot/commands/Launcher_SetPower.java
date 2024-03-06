@@ -27,10 +27,10 @@ public class Launcher_SetPower extends Command {
   @Override
   public void execute() {
 
-    if(Robot.intake.getFlipMotorPosition() <= RobotMap.flipperThreshold){
-      Robot.intake.intakeSpin(-0.5);
+    // if(Robot.intake.getFlipMotorPosition() <= RobotMap.flipperThreshold){
+    //   Robot.intake.intakeSpin(-0.5);
       Robot.launcher.startShooter(speed);
-    }
+    // }
 
 
   }

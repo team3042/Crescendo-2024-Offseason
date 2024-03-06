@@ -7,15 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class Intake_SetPower extends Command {
-
-  double power;
-
-  /** Creates a new IntakeToggleMaker. */
-  public Intake_SetPower(double speed) {
+public class Reset_Flipper extends Command {
+  /** Creates a new Reset_Flipper. */
+  public Reset_Flipper() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.intake);
-    power = speed;
   }
 
   // Called when the command is initially scheduled.
@@ -26,12 +22,17 @@ public class Intake_SetPower extends Command {
   @Override
   public void execute() {
 
-    if(!Robot.intake.intakeLimitSwitch.get() && power < 0){
-      Robot.intake.intakeSpin(0);
-    } else {
-      
-      Robot.intake.intakeSpin(power);
+    if(Robot.intake.flipLimitSwitch.get()){
+
+      Robot.intake.setFlipperPower(0.3);
+    } else{
+
+      Robot.intake.setFlipperPower(0);
+      Robot.intake.resetEncoders();
     }
+
+
+  
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +42,6 @@ public class Intake_SetPower extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return !Robot.intake.flipLimitSwitch.get();
   }
 }

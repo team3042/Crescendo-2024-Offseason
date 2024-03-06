@@ -37,25 +37,25 @@ public class RobotMap {
     public static final double kP_Y_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following	
     public static final double kP_THETA_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
 	
-    public static final boolean kFrontLeftDriveEncoderReversed = true;
+    public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
 	public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 0.436523; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 0.377197; // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kFrontRightDriveEncoderReversed = true;
+    public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kFrontRightTurningEncoderReversed = false;
 	public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = -0.264893; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = 0.304688; //- 0.032715; // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kBackLeftDriveEncoderReversed = true;
+    public static final boolean kBackLeftDriveEncoderReversed = false;
 	public static final boolean kBackLeftTurningEncoderReversed = false;
 	public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = 0.004883; //155 // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = -0.006104; //155 // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kBackRightDriveEncoderReversed = true;
+    public static final boolean kBackRightDriveEncoderReversed = false;
     public static final boolean kBackRightTurningEncoderReversed = false;
 	public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
-    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 0.082275; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = -0.213867; // More negative turns wheel more to the left (counter-clockwise)ore negative turns wheel more to the left (counter-clockwise)
 
 	
 	public static final double JOYSTICK_DRIVE_SCALE = 0.6; // Determines the max driving speed of the robot
@@ -78,11 +78,11 @@ public class RobotMap {
 
 	/** Intake Subsystem Settings */
 	public static final boolean intakeMotorReversed = false;
-    public static final boolean flipMotorReversed = false;
+    public static final boolean flipMotorReversed = true;
 	public static final double kIntakeThreshold = 50;
 	public static final double flipSpeed = 0.4;
 	public static final double intakeSpeed = 0.4;
-	public static final double flipperThreshold = 80;
+	public static final double flipperThreshold = 100;
 
 	/** Shooter Subsystem Settings */
 

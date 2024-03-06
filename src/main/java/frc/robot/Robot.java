@@ -68,18 +68,18 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+
+    SmartDashboard.putBoolean("Intake Limit Switch", Robot.intake.intakeLimitSwitch.get());
+  }
 
   @Override
   public void disabledPeriodic() {
-    SmartDashboard.putNumber("FrontLeft Abs Encoder Counts", drivetrain.getFrontLeft().getAbsoluteEncoderRadians() * Math.PI);
-    SmartDashboard.putNumber("FrontRight Abs Encoder Counts", drivetrain.getFrontRight().getAbsoluteEncoderRadians() * Math.PI);
-    SmartDashboard.putNumber("BackLeft Abs Encoder Counts", drivetrain.getBackLeft().getAbsoluteEncoderRadians() * Math.PI);
-    SmartDashboard.putNumber("BackRight Abs Encoder Counts", drivetrain.getBackRight().getAbsoluteEncoderRadians() * Math.PI);
-    SmartDashboard.putString("BL State", drivetrain.getBackLeft().getState().toString());
-    SmartDashboard.putString("BR State", drivetrain.getBackRight().getState().toString());
-    SmartDashboard.putString("FL State", drivetrain.getFrontLeft().getState().toString());
-    SmartDashboard.putString("FR State", drivetrain.getFrontRight().getState().toString());
+    SmartDashboard.putNumber("FrontLeft Abs Rotations", drivetrain.getFrontLeft().getAbsoluteEncoderRotations());
+    SmartDashboard.putNumber("FrontRight Abs Rotations", drivetrain.getFrontRight().getAbsoluteEncoderRotations());
+    SmartDashboard.putNumber("BackLeft Abs Rotations", drivetrain.getBackLeft().getAbsoluteEncoderRotations());
+    SmartDashboard.putNumber("BackRight Abs Rotations", drivetrain.getBackRight().getAbsoluteEncoderRotations());
+    SmartDashboard.putBoolean("Intake Limit Switch", Robot.intake.intakeLimitSwitch.get());
 
     Robot.intake.resetEncoders();
   }

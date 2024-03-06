@@ -33,10 +33,12 @@ public class Flipper_SetPosition extends Command {
     FlipPositionError = FlipperGoal - Robot.intake.getFlipMotorPosition();
     boolean flipGoalReached = Math.abs(FlipPositionError) < RobotMap.flipperThreshold;
     
-    if(Robot.intake.flipLimitSwitch.get() || flipGoalReached){
+    if(flipGoalReached){
       Robot.intake.setFlipperPower(0);
-    } else{
+    } else if(!Robot.intake.flipLimitSwitch.get() && FlipperGoal == 0){
 
+      Robot.intake.setFlipperPower(0);
+    } else {
       Robot.intake.setFlipperPower(Math.copySign(0.5, FlipPositionError));
     }
 

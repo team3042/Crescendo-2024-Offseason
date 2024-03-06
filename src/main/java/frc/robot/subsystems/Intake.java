@@ -43,7 +43,7 @@ public class Intake extends SubsystemBase {
     flipMotor.setInverted(RobotMap.flipMotorReversed);
 
     intakeMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCoast or kBrake affect shooter power
-    flipMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCoast or kBrake affect shooter power
+    flipMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCoast or kBrake affect shooter power
 
     intakeMotor.getEncoder().setPositionConversionFactor(42);
     flipMotor.getEncoder().setPositionConversionFactor(42);
@@ -90,16 +90,9 @@ public class Intake extends SubsystemBase {
 
   public void setFlipperPower(double power){
   
-    if(flipLimitSwitch.get() && power > 0){
-
-      flipMotor.set(0);
-      
-    } else {
-
       flipMotor.set(power);
-    }
 
-    }
+  }
     
 
 

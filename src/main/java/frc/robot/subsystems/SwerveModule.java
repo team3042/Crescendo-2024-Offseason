@@ -10,6 +10,7 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -52,6 +53,7 @@ public class SwerveModule extends SubsystemBase{
         CANcoderConfiguration config = new CANcoderConfiguration();
         config.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
         config.MagnetSensor.MagnetOffset = absoluteEncoderOffset;
+        config.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
 
         // more configurations
         absoluteEncoder.getConfigurator().apply(config);
@@ -104,17 +106,18 @@ public class SwerveModule extends SubsystemBase{
     }
 
     // Get the absolute position of the module in radians
-    public double getAbsoluteEncoderRadians() {
+    public double getAbsoluteEncoderRotations() {
         double angle = absoluteEncoder.getPosition().getValueAsDouble(); // Gets the absolute position in degrees
-        angle *= (180/Math.PI);
-        angle -= (absoluteEncoderOffsetDegrees * 360);
+        // angle *= (180/Math.PI);
+        angle -= (absoluteEncoderOffsetDegrees); // * 360
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
 
     // Reset the encoders to their starting positions
     public void resetEncoders() {
         driveEncoder.setPosition(0);
-        turningEncoder.setPosition(getAbsoluteEncoderRadians());
+        turningEncoder.setPosition(absoluteEncoder.getPosition().getValueAsDouble());
+        //turningEncoder.setPosition(getAbsoluteEncoderRotations());
     }
 
     // Get the current SwerveModuleState of the module

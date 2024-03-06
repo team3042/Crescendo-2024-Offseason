@@ -37,16 +37,16 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
 	
 		/* Intake actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(180)); //TODO: Find
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300)); //TODO: Find
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0)); //TODO: Find
-		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.5));
-		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.5));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );
 		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.5));
 		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(0));
 
 	/*Launcher actions */
-		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0.6));
-		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.B_BUTTON)).onTrue(new Intake_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(1));
+		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0));
 	} 
  
   public void setNormalScale() {
