@@ -8,16 +8,54 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 
 public class Climber extends SubsystemBase {
 
-  private final ClimberModule leftClimber = new ClimberModule();
-  private final ClimberModule rightClimber = new ClimberModule();
+    private final CANSparkMax leftClimber;
+    private final CANSparkMax rightClimber;
   /** Creates a new Climber. */
   public Climber() {
 
-    
+    leftClimber = new CANSparkMax(RobotMap.kLeftHangMotor, MotorType.kBrushless);
+    rightClimber = new CANSparkMax(RobotMap.kRightHangMotor, MotorType.kBrushless);
+
+    leftClimber.setInverted(RobotMap.kleftClimberReversed);
+
+    leftClimber.setIdleMode(IdleMode.kBrake);
+    rightClimber.setIdleMode(IdleMode.kBrake);
+
+  }
+
+  public void resetEncoders(){
+
+    leftClimber.getEncoder().setPosition(0);
+    rightClimber.getEncoder().setPosition(0);
+  }
+
+  public void moveClimberUp(double power){
+
+    leftClimber.set(power);
+    rightClimber.set(power);
+  }
+
+  public void moveClimberDown(double power){
+    leftClimber.set(-power);
+    rightClimber.set(-power);
+  }
+
+  public double getLeftClimberCounts(){
+    return leftClimber.getEncoder().getPosition();
+
+  }
+
+  public double getRightClimberCounts(){
+    return rightClimber.getEncoder().getPosition();
 
   }
 

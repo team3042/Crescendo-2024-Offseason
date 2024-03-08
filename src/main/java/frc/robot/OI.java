@@ -9,6 +9,8 @@ import frc.robot.commands.Drivetrain_XStance;
 import frc.robot.commands.Flipper_SetPosition;
 import frc.robot.commands.Intake_SetPower;
 import frc.robot.commands.Launcher_SetPower;
+import frc.robot.commands.Move_Climber_Down;
+import frc.robot.commands.Move_Climber_Up;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -28,6 +30,23 @@ public class OI {
   public static final GenericHID driverController = new GenericHID(RobotMap.DRIVER_XBOX_USB_PORT);
   public static final GenericHID gunnerController = new GenericHID(RobotMap.GUNNER_XBOX_USB_PORT);
 
+  public boolean getLeftJoyStickUp(GenericHID gunnerController){
+	return gunnerController.getRawAxis(RobotMap.LEFT_VERTICAL_JOYSTICK_AXIS) >= 0.5;
+  }
+
+  public boolean getRightJoyStickUp(GenericHID gunnerController){
+	return gunnerController.getRawAxis(RobotMap.RIGHT_VERTICAL_JOYSTICK_AXIS) >= 0.5;
+  }
+
+  public boolean getLeftJoyStickDown(GenericHID gunnerController){
+	return gunnerController.getRawAxis(RobotMap.LEFT_VERTICAL_JOYSTICK_AXIS) <= -0.5;
+  }
+
+  public boolean getRightJoyStickDown(GenericHID gunnerController){
+	return gunnerController.getRawAxis(RobotMap.RIGHT_VERTICAL_JOYSTICK_AXIS) <= -0.5;
+  }
+
+
   public OI() {
     configureBindings();
 
@@ -37,18 +56,28 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
 	
 		/* Intake actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300)); //TODO: Find
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0)); //TODO: Find
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.5));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.6));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );
-		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.5));
-		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.7));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onFalse(new Intake_SetPower(0));
 
 	/*Launcher actions */
-		new Trigger(() -> gunnerController.getRawButtonPressed(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(1));
-		new Trigger(() -> gunnerController.getRawButtonReleased(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0));
-	} 
- 
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(1)); // for speaker
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onFalse(new Launcher_SetPower(0));
+		// new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0.3)); //For the amp (not tested)
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Launcher_SetPower(-0.2)); // intake broke, intake and outake through shooter
+
+	/*Climber actions */
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onTrue(new Move_Climber_Up(0.5));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onFalse(new Move_Climber_Up(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Move_Climber_Down(0.5));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Move_Climber_Down(0));
+
+	}  
+   
   public void setNormalScale() {
 		CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
 		isLowScale = false;
@@ -75,7 +104,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * CURRENT_DRIVE_SCALE * -1; // Multiply by -1 reverses the direction
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * CURRENT_DRIVE_SCALE * 1; // Multiply by -1 reverses the direction
 		}	
 	}
 	public double getYSpeed() {
@@ -85,7 +114,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * CURRENT_DRIVE_SCALE * -1; // Multiply by -1 reverses the direction, 0.5 to reduce speed
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * CURRENT_DRIVE_SCALE * 1; // Multiply by -1 reverses the direction, 0.5 to reduce speed
 		}	
 	}
 	public double getZSpeed() {

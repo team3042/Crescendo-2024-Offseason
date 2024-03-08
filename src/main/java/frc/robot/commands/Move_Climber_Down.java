@@ -6,31 +6,33 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Climber;
 
-public class Launcher_SetPower extends Command {
+public class Move_Climber_Down extends Command {
 
-  double speed;
-  /** Creates a new Launcher_SetPower. */
-  public Launcher_SetPower(double power) {
+  double Power;
+  /** Creates a new Climber_SetPosition. */
+  public Move_Climber_Down(double power) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.launcher);
-    speed = power;
+    addRequirements(Robot.climber);
+    Power = power;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    // if(Robot.intake.getFlipMotorPosition() <= RobotMap.flipperThreshold){
-    //   Robot.intake.intakeSpin(-0.5);
-      Robot.launcher.startShooter(speed);
-    // }
+    if(Power <= 0 && (Robot.climber.getLeftClimberCounts() <= 5 && Robot.climber.getRightClimberCounts() <= 5)){
 
+      Robot.climber.moveClimberDown(0);
+    } else {
+
+      Robot.climber.moveClimberDown(Power);
+    }
 
   }
 

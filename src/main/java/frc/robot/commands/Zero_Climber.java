@@ -7,32 +7,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class Launcher_SetPower extends Command {
-
-  double speed;
-  /** Creates a new Launcher_SetPower. */
-  public Launcher_SetPower(double power) {
+public class Zero_Climber extends Command {
+  /** Creates a new Zer_Climber. */
+  public Zero_Climber() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.launcher);
-    speed = power;
+    addRequirements(Robot.climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-
-    // if(Robot.intake.getFlipMotorPosition() <= RobotMap.flipperThreshold){
-    //   Robot.intake.intakeSpin(-0.5);
-      Robot.launcher.startShooter(speed);
-    // }
-
-
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

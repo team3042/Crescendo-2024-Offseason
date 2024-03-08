@@ -1,13 +1,11 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import frc.lib.Log;
 import frc.robot.RobotMap;
 
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -121,8 +119,6 @@ public class Drivetrain extends SubsystemBase {
 
 	@Override
 	public void periodic() {
-		SmartDashboard.putNumber("Gyro Angle", pitchAngle()); // The current gyroscope angle
-
 		// This is for autonomous path-following
 		odometry.update(getRotation2d(), new SwerveModulePosition[] {frontLeft.getPosition(),
 																	frontRight.getPosition(),
