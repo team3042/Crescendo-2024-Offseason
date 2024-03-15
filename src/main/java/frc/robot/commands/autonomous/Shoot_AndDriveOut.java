@@ -4,17 +4,26 @@
 
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drivetrain_GyroStraight;
+import frc.robot.commands.Intake_SetPower;
+import frc.robot.commands.Launcher_SetPower;
+import frc.robot.subsystems.Launcher;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Autonomous_Default extends SequentialCommandGroup {
-  /** Creates a new Autonomous_Default. */
-  public Autonomous_Default() {
+public class Shoot_AndDriveOut extends SequentialCommandGroup {
+  /** Creates a new Shoot_AndDriveOut. */
+  public Shoot_AndDriveOut() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Drivetrain_GyroStraight(2.4,0.8,0));
+    Command shoot = new Launcher_SetPower(0.8);
+    Command sendNote = new Intake_SetPower(-0.4);
+    Command drive = new Drivetrain_GyroStraight(0., 0, 0);
+    
+    addCommands();
   }
 }

@@ -58,7 +58,7 @@ public class RobotMap {
     public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 90; // More negative turns wheel more to the left (counter-clockwise)ore negative turns wheel more to the left (counter-clockwise)
 
 	
-	public static final double JOYSTICK_DRIVE_SCALE = 0.6; // Determines the max driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE = 0.8; // Determines the max driving speed of the robot
 	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
 
 	/** Swerve Module Settings ************************************************/

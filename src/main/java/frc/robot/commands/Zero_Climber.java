@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
 public class Zero_Climber extends Command {
+
+  public double leftlauncherPos;
+  public double rightlauncherPos;
   /** Creates a new Zer_Climber. */
   public Zero_Climber() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -16,11 +19,25 @@ public class Zero_Climber extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    leftlauncherPos = Robot.climber.getLeftClimberCounts();
+    rightlauncherPos = Robot.climber.getRightClimberCounts();
+
+    while(leftlauncherPos > 5){
+      Robot.climber.moveLeftClimber(-0.5);
+    }
+
+    while(rightlauncherPos > 5){
+      Robot.climber.moveRightClimber(-0.5);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -29,6 +46,6 @@ public class Zero_Climber extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (Robot.climber.getLeftClimberCounts() <= 5) && (Robot.climber.getRightClimberCounts() <= 5);
   }
 }

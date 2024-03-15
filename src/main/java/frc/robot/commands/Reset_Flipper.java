@@ -24,9 +24,9 @@ public class Reset_Flipper extends Command {
 
     if(Robot.intake.flipLimitSwitch.get()){
 
-      Robot.intake.setFlipperPower(0.3);
+      Robot.intake.setFlipperPower(-0.3);
     } else{
-
+      
       Robot.intake.setFlipperPower(0);
       Robot.intake.resetEncoders();
     }

@@ -10,11 +10,11 @@ import frc.robot.commands.Drivetrain_GyroStraight;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Autonomous_Default extends SequentialCommandGroup {
-  /** Creates a new Autonomous_Default. */
-  public Autonomous_Default() {
+public class Short_LeaveZone extends SequentialCommandGroup {
+  /** Creates a new Short_LeaveZone. */
+  public Short_LeaveZone() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Drivetrain_GyroStraight(2.4,0.8,0));
+    addCommands(new Drivetrain_GyroStraight(1.21, 0.8, 0));
   }
 }

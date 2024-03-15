@@ -11,6 +11,8 @@ import frc.robot.commands.Intake_SetPower;
 import frc.robot.commands.Launcher_SetPower;
 import frc.robot.commands.Move_Climber_Down;
 import frc.robot.commands.Move_Climber_Up;
+import frc.robot.commands.Reset_Flipper;
+import frc.robot.commands.Zero_Climber;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -46,10 +48,14 @@ public class OI {
 	return gunnerController.getRawAxis(RobotMap.RIGHT_VERTICAL_JOYSTICK_AXIS) <= -0.5;
   }
 
+  public boolean getRightTrigger(GenericHID gunnerController){
+		return gunnerController.getRawAxis(RobotMap.RIGHT_TRIGGER_AXIS) >= 0.95 ;
+	}
+
 
   public OI() {
     configureBindings();
-
+ 
     /* Drivetrain actions */
 		new Trigger(() -> driverController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new InstantCommand(Robot.drivetrain::zeroGyro, Robot.drivetrain)); // Zero the gyro, this is helpful at the start of a match for field-oriented driving
 		new Trigger(() -> driverController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Drivetrain_XStance()); // Defensive X-stance command
@@ -60,21 +66,24 @@ public class OI {
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.6));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.7));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.9));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onFalse(new Intake_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onTrue(new Reset_Flipper());
 
 	/*Launcher actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(1)); // for speaker
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0.8)); // for speaker
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onFalse(new Launcher_SetPower(0));
-		// new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0.3)); //For the amp (not tested)
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Launcher_SetPower(0.3));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Launcher_SetPower(-0.2));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Launcher_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Launcher_SetPower(-0.2)); // intake broke, intake and outake through shooter
 
 	/*Climber actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onTrue(new Move_Climber_Up(0.5));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onFalse(new Move_Climber_Up(0));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Move_Climber_Down(0.5));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Move_Climber_Down(0));
+		new Trigger(() -> driverController.getRawButton(RobotMap.START_BUTTON)).onTrue(new Move_Climber_Up(0.5));
+		new Trigger(() -> driverController.getRawButton(RobotMap.START_BUTTON)).onFalse(new Move_Climber_Up(0));
+		new Trigger(() -> driverController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Move_Climber_Down(0.5));
+		new Trigger(() -> driverController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Move_Climber_Down(0));
+		new Trigger(() -> driverController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Zero_Climber());
 
 	}  
    
@@ -100,7 +109,7 @@ public class OI {
   public double getXSpeed() {
 		double joystickValue = driverController.getRawAxis(1);
 		// double joystickValue = driverController.getRightY(); // this would be for a flight joystick
-		if (Math.abs(joystickValue) < 0.05) { // This is our deadband
+		if (Math.abs(joystickValue) < 0.07) { // This is our deadband
 			return 0.0;
 		}
 		else {
@@ -110,7 +119,7 @@ public class OI {
 	public double getYSpeed() {
 		// double joystickValue = joyRight.getX(); // this would be for a flight joystick
 		double joystickValue = driverController.getRawAxis(0);
-		if (Math.abs(joystickValue) < 0.05) { // This is our deadband
+		if (Math.abs(joystickValue) < 0.07) { // This is our deadband
 			return 0.0;
 		}
 		else {
@@ -120,20 +129,16 @@ public class OI {
 	public double getZSpeed() {
 		// double joystickValue = joyLeft.getX(); // this would be for a flight joystick
 		double joystickValue = driverController.getRawAxis(4);
-		if (Math.abs(joystickValue) < 0.05) { // This is our deadband
+		if (Math.abs(joystickValue) < 0.07) { // This is our deadband
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxTurningSpeedRadiansPerSecond * CURRENT_DRIVE_SCALE * -0.75; // Multiply by -1 reverses the direction
+			return joystickValue * RobotMap.kPhysicalMaxTurningSpeedRadiansPerSecond * CURRENT_DRIVE_SCALE * -1; // Multiply by -1 reverses the direction
 		}	
 	}
 
 
   private void configureBindings() {}
-
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
 
 }
 

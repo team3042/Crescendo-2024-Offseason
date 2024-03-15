@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.Log;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.autonomous.Autonomous_Default;
+import frc.robot.commands.autonomous.Short_LeaveZone;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -55,6 +56,7 @@ public class Robot extends TimedRobot {
     /* Autonomous Routines */
 
     chooser.setDefaultOption("Default", new Autonomous_Default());
+    chooser.setDefaultOption("Short_LeaveZone", new Short_LeaveZone());
     //add more auto options here
     SmartDashboard.putData(chooser);
 
@@ -89,7 +91,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = oi.getAutonomousCommand();
+
+    m_autonomousCommand = chooser.getSelected();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -97,7 +100,10 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void autonomousExit() {}
