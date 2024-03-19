@@ -7,7 +7,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.ADIS16448_IMU;
+// import edu.wpi.first.wpilibj.ADIS16448_IMU; Analog Gyro
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.Log;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.autonomous.AutonomousMode_Default;
+import frc.robot.commands.autonomous.Autonomous_Default;
+import frc.robot.commands.autonomous.Short_LeaveZone;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -48,12 +49,14 @@ public class Robot extends TimedRobot {
     drivetrain.setDefaultCommand(new DriveCommand());
 
     drivetrain.zeroGyro();
+    climber.resetEncoders();
     //TODO: reset encoders for all subsystems
 
 
     /* Autonomous Routines */
 
-    chooser.setDefaultOption("Default", new AutonomousMode_Default());
+    chooser.setDefaultOption("Default", new Autonomous_Default());
+    chooser.setDefaultOption("Short_LeaveZone", new Short_LeaveZone());
     //add more auto options here
     SmartDashboard.putData(chooser);
 
@@ -70,18 +73,17 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
 
-    SmartDashboard.putBoolean("Intake Limit Switch", Robot.intake.intakeLimitSwitch.get());
   }
 
   @Override
   public void disabledPeriodic() {
-    SmartDashboard.putNumber("FrontLeft Abs Rotations", drivetrain.getFrontLeft().getAbsoluteEncoderRotations());
-    SmartDashboard.putNumber("FrontRight Abs Rotations", drivetrain.getFrontRight().getAbsoluteEncoderRotations());
-    SmartDashboard.putNumber("BackLeft Abs Rotations", drivetrain.getBackLeft().getAbsoluteEncoderRotations());
-    SmartDashboard.putNumber("BackRight Abs Rotations", drivetrain.getBackRight().getAbsoluteEncoderRotations());
+    SmartDashboard.putNumber("FrontLeft Abs Radians", drivetrain.getFrontLeft().getAbsoluteEncoderRadians() * (180/Math.PI));
+    SmartDashboard.putNumber("FrontRight Abs Rotations", drivetrain.getFrontRight().getAbsoluteEncoderRadians() * (180/Math.PI));
+    SmartDashboard.putNumber("BackLeft Abs Rotations", drivetrain.getBackLeft().getAbsoluteEncoderRadians() * (180/Math.PI));
+    SmartDashboard.putNumber("BackRight Abs Rotations", drivetrain.getBackRight().getAbsoluteEncoderRadians() * (180/Math.PI));
+		SmartDashboard.putNumber("Gyro Angle", drivetrain.getGyroAngle()); // The current gyroscope angle
     SmartDashboard.putBoolean("Intake Limit Switch", Robot.intake.intakeLimitSwitch.get());
 
-    Robot.intake.resetEncoders();
   }
 
   @Override
@@ -89,7 +91,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = oi.getAutonomousCommand();
+
+    m_autonomousCommand = chooser.getSelected();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -97,7 +100,10 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void autonomousExit() {}

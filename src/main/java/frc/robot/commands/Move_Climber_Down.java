@@ -6,12 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Climber;
 
-public class Reset_Flipper extends Command {
-  /** Creates a new Reset_Flipper. */
-  public Reset_Flipper() {
+public class Move_Climber_Down extends Command {
+
+  double Power;
+  /** Creates a new Climber_SetPosition. */
+  public Move_Climber_Down(double power) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.intake);
+    addRequirements(Robot.climber);
+    Power = power;
   }
 
   // Called when the command is initially scheduled.
@@ -22,17 +26,14 @@ public class Reset_Flipper extends Command {
   @Override
   public void execute() {
 
-    if(Robot.intake.flipLimitSwitch.get()){
+    if(Power <= 0 && (Robot.climber.getLeftClimberCounts() <= 5 && Robot.climber.getRightClimberCounts() <= 5)){
 
-      Robot.intake.setFlipperPower(-0.3);
-    } else{
-      
-      Robot.intake.setFlipperPower(0);
-      Robot.intake.resetEncoders();
+      Robot.climber.moveClimberDown(0);
+    } else {
+
+      Robot.climber.moveClimberDown(Power);
     }
 
-
-  
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +43,6 @@ public class Reset_Flipper extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.intake.flipLimitSwitch.get();
+    return false;
   }
 }

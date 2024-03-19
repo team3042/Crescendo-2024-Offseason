@@ -1,29 +1,19 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-
-import com.ctre.phoenix6.configs.CANcoderConfiguration;
-import com.ctre.phoenix6.hardware.CANcoder;
-import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
-import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import frc.robot.RobotMap;
 
 import edu.wpi.first.math.controller.PIDController;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.RobotController;
 
-public class SwerveModule extends SubsystemBase{
+public class SwerveModule {
 
     private static final double kDriveEncoderRot2Meter = RobotMap.kDriveEncoderRot2Meter;
     private static final double kDriveEncoderRPM2MeterPerSec = RobotMap.kDriveEncoderRPM2MeterPerSec;
@@ -38,7 +28,7 @@ public class SwerveModule extends SubsystemBase{
 
     private final PIDController turningPidController;
 
-    private final CANcoder absoluteEncoder;
+    private final CANCoder absoluteEncoder;
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetDegrees;
 
@@ -48,15 +38,9 @@ public class SwerveModule extends SubsystemBase{
 
         this.absoluteEncoderOffsetDegrees = absoluteEncoderOffset;
         this.absoluteEncoderReversed = absoluteEncoderReversed;
-        absoluteEncoder = new CANcoder(absoluteEncoderId);
+        absoluteEncoder = new CANCoder(absoluteEncoderId);
 
-        CANcoderConfiguration config = new CANcoderConfiguration();
-        config.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
-        config.MagnetSensor.MagnetOffset = absoluteEncoderOffset;
-        config.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
-
-        // more configurations
-        absoluteEncoder.getConfigurator().apply(config);
+        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
 
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -106,18 +90,16 @@ public class SwerveModule extends SubsystemBase{
     }
 
     // Get the absolute position of the module in radians
-    public double getAbsoluteEncoderRotations() {
-        double angle = absoluteEncoder.getPosition().getValueAsDouble(); // Gets the absolute position in degrees
-        // angle *= (180/Math.PI);
-        angle -= (absoluteEncoderOffsetDegrees); // * 360
+    public double getAbsoluteEncoderRadians() {
+        double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
+        angle *= (Math.PI / 180); // Convert degrees to radians
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
 
     // Reset the encoders to their starting positions
     public void resetEncoders() {
         driveEncoder.setPosition(0);
-        turningEncoder.setPosition(absoluteEncoder.getPosition().getValueAsDouble());
-        //turningEncoder.setPosition(getAbsoluteEncoderRotations());
+        turningEncoder.setPosition(getAbsoluteEncoderRadians());
     }
 
     // Get the current SwerveModuleState of the module

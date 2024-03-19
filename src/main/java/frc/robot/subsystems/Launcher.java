@@ -29,11 +29,8 @@ public class Launcher extends SubsystemBase {
     leftShooterMotor.setInverted(RobotMap.intakeMotorReversed);
     rightShooterMotor.setInverted(RobotMap.flipMotorReversed);
 
-    leftShooterMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCOast or kBrake affect shooter power
-    rightShooterMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCOast or kBrake affect shooter power
-
-    leftShooterMotor.getEncoder().setPositionConversionFactor(42);
-    rightShooterMotor.getEncoder().setPositionConversionFactor(42);
+    leftShooterMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCOast or kBrake affect shooter power
+    rightShooterMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCOast or kBrake affect shooter power
   }
 
   @Override

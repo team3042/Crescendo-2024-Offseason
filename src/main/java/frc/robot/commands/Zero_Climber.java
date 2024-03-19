@@ -7,32 +7,36 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class Reset_Flipper extends Command {
-  /** Creates a new Reset_Flipper. */
-  public Reset_Flipper() {
+public class Zero_Climber extends Command {
+
+  public double leftlauncherPos;
+  public double rightlauncherPos;
+  /** Creates a new Zer_Climber. */
+  public Zero_Climber() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.intake);
+    addRequirements(Robot.climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if(Robot.intake.flipLimitSwitch.get()){
+    leftlauncherPos = Robot.climber.getLeftClimberCounts();
+    rightlauncherPos = Robot.climber.getRightClimberCounts();
 
-      Robot.intake.setFlipperPower(-0.3);
-    } else{
-      
-      Robot.intake.setFlipperPower(0);
-      Robot.intake.resetEncoders();
+    while(leftlauncherPos > 5){
+      Robot.climber.moveLeftClimber(-0.5);
     }
 
-
-  
+    while(rightlauncherPos > 5){
+      Robot.climber.moveRightClimber(-0.5);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +46,6 @@ public class Reset_Flipper extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.intake.flipLimitSwitch.get();
+    return (Robot.climber.getLeftClimberCounts() <= 5) && (Robot.climber.getRightClimberCounts() <= 5);
   }
 }

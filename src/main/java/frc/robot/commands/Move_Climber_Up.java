@@ -2,14 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.autonomous;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class AutonomousMode_Default extends Command {
-  /** Creates a new AutonomousMode_Default. */
-  public AutonomousMode_Default() {
+public class Move_Climber_Up extends Command {
+
+  double Power;
+  /** Creates a new Move_Climber_Up. */
+  public Move_Climber_Up(double power) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.climber);
+    Power = power;
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +24,16 @@ public class AutonomousMode_Default extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    if(Power >= 0 && (Robot.climber.getLeftClimberCounts() >= RobotMap.kMaxClimberCounts && Robot.climber.getRightClimberCounts() >= RobotMap.kMaxClimberCounts)){
+
+      Robot.climber.moveClimberUp(0);
+    } else {
+
+      Robot.climber.moveClimberUp(Power);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override

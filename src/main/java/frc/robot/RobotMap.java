@@ -37,28 +37,28 @@ public class RobotMap {
     public static final double kP_Y_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following	
     public static final double kP_THETA_CONTROLLER = 0; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards. Only used for autonomous path-following
 	
-    public static final boolean kFrontLeftDriveEncoderReversed = false;
+    public static final boolean kFrontLeftDriveEncoderReversed = true;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
 	public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 0.377197; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 20; // More negative turns wheel more to the left (counter-clockwise)
     
-    public static final boolean kFrontRightDriveEncoderReversed = false;
+    public static final boolean kFrontRightDriveEncoderReversed = true;
     public static final boolean kFrontRightTurningEncoderReversed = false;
 	public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = 0.304688; //- 0.032715; // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = 0; //- 0.032715; // More negative turns wheel more to the left (counter-clockwise)
     
     public static final boolean kBackLeftDriveEncoderReversed = false;
 	public static final boolean kBackLeftTurningEncoderReversed = false;
 	public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = -0.006104; //155 // More negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = 0; //155 // More negative turns wheel more to the left (counter-clockwise)
     
     public static final boolean kBackRightDriveEncoderReversed = false;
     public static final boolean kBackRightTurningEncoderReversed = false;
 	public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
-    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = -0.213867; // More negative turns wheel more to the left (counter-clockwise)ore negative turns wheel more to the left (counter-clockwise)
+    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 90; // More negative turns wheel more to the left (counter-clockwise)ore negative turns wheel more to the left (counter-clockwise)
 
 	
-	public static final double JOYSTICK_DRIVE_SCALE = 0.6; // Determines the max driving speed of the robot
+	public static final double JOYSTICK_DRIVE_SCALE = 0.8; // Determines the max driving speed of the robot
 	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
 
 	/** Swerve Module Settings ************************************************/
@@ -88,6 +88,11 @@ public class RobotMap {
 
 	public static final double shooterSpeed = 0.8;
 
+
+	/** CLimber Subsystem Settings */
+
+	public static final double kMaxClimberCounts = 2500; //TODO: Find
+	public static final boolean kleftClimberReversed = true;
 
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
@@ -129,10 +134,12 @@ public class RobotMap {
     public static final int Y_BUTTON = 4;
     public static final int LEFT_BUMPER = 5;
     public static final int RIGHT_BUMPER = 6;
-    public static final int LEFT_TRIGGER_AXIS = 7;
+    public static final int LEFT_TRIGGER_AXIS = 2;
     public static final int RIGHT_TRIGGER_AXIS = 3;
     public static final int PREV_BUTTON = 7;
     public static final int START_BUTTON = 8;
+	public static final int DPAD_UP = 9; //TODO: Find number
+	public static final int DPAD_DOWN = 11; //TODO: Find number
 
 	
 }
