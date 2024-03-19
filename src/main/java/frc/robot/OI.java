@@ -64,9 +64,9 @@ public class OI {
 		/* Intake actions */
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(0.6));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(1));//0.6
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-0.9));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onTrue(new Intake_SetPower(-1));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.Y_BUTTON)).onFalse(new Intake_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.START_BUTTON)).onTrue(new Reset_Flipper());
 
@@ -74,8 +74,8 @@ public class OI {
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0.8)); // for speaker
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onFalse(new Launcher_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Launcher_SetPower(0.3));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Launcher_SetPower(-0.2));
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Launcher_SetPower(0));
+		// new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Launcher_SetPower(-0.2));
+		// new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Launcher_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0));
 
 	/*Climber actions */
