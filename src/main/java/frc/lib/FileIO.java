@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import edu.wpi.first.wpilibj.RobotBase;
-
 import frc.lib.FileIO;
 
 public class FileIO {

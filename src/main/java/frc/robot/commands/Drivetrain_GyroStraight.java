@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.util.sendable.SendableRegistry;
 
 import frc.lib.Log;
@@ -10,7 +10,7 @@ import frc.robot.subsystems.*;
 
 /** Drivetrain Gyro Straight **************************************************
  * Command for driving straight using gyroscope feedback. */
-public class Drivetrain_GyroStraight extends CommandBase {
+public class Drivetrain_GyroStraight extends Command {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;

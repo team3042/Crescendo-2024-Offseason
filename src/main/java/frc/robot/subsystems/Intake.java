@@ -42,8 +42,8 @@ public class Intake extends SubsystemBase {
     intakeMotor.setInverted(RobotMap.intakeMotorReversed);
     flipMotor.setInverted(RobotMap.flipMotorReversed);
 
-    intakeMotor.setIdleMode(IdleMode.kCoast); //TODO: check if kCoast or kBrake affect shooter power
-    flipMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCoast or kBrake affect shooter power
+    intakeMotor.setIdleMode(IdleMode.kCoast);
+    flipMotor.setIdleMode(IdleMode.kBrake);
 
     intakeMotor.getEncoder().setPositionConversionFactor(42);
     flipMotor.getEncoder().setPositionConversionFactor(42);

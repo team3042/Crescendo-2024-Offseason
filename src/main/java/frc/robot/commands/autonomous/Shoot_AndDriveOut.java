@@ -5,12 +5,11 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Drivetrain_GyroStraight;
 import frc.robot.commands.Intake_SetPower;
 import frc.robot.commands.Launcher_SetPower;
-import frc.robot.subsystems.Launcher;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -22,8 +21,10 @@ public class Shoot_AndDriveOut extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     Command shoot = new Launcher_SetPower(0.8);
     Command sendNote = new Intake_SetPower(-0.4);
-    Command drive = new Drivetrain_GyroStraight(0., 0, 0);
+    Command drive = new Drivetrain_GyroStraight(-1.21, 0.8, 0);
+    Command wait = new WaitCommand(2);
+    Command stopMotors = new SequentialCommandGroup(new Launcher_SetPower(0), new Intake_SetPower(0));
     
-    addCommands();
+    addCommands(shoot, wait, sendNote, stopMotors, drive);
   }
 }

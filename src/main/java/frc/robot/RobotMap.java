@@ -10,8 +10,8 @@ public class RobotMap {
 
 	/** CAN ID numbers ********************************************************/
 	
-    public static final int kLeftShooterMotorPort = 19; //TODO: Find out how to connect and use pwm for motor
-    public static final int kRightShooterMotorPort = 20; //TODO: Find out how to connect and use pwm for motor
+    public static final int kLeftShooterMotorPort = 19;
+    public static final int kRightShooterMotorPort = 20;
 	public static final int kFrontLeftDriveAbsoluteEncoderPort = 1;
 	public static final int kFrontRightDriveAbsoluteEncoderPort = 2;
 	public static final int kBackLeftDriveAbsoluteEncoderPort = 3;
@@ -138,8 +138,6 @@ public class RobotMap {
     public static final int RIGHT_TRIGGER_AXIS = 3;
     public static final int PREV_BUTTON = 7;
     public static final int START_BUTTON = 8;
-	public static final int DPAD_UP = 9; //TODO: Find number
-	public static final int DPAD_DOWN = 11; //TODO: Find number
 
 	
 }
