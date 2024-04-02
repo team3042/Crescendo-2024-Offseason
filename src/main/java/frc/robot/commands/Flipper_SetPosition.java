@@ -39,7 +39,7 @@ public class Flipper_SetPosition extends Command {
 
       Robot.intake.setFlipperPower(0);
     } else {
-      Robot.intake.setFlipperPower(Math.copySign(0.5, FlipPositionError));
+      Robot.intake.setFlipperPower(Math.copySign(0.4, FlipPositionError));
     }
 
     SmartDashboard.putNumber("Flipper Position Goal: ", FlipperGoal);

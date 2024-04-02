@@ -60,7 +60,7 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
 	
 		/* Intake actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(RobotMap.flipperOutPos));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(1));//0.6
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );

@@ -14,14 +14,14 @@ import frc.robot.commands.Launcher_SetPower;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Shoot_AndDriveOut extends SequentialCommandGroup {
-  /** Creates a new Shoot_AndDriveOut. */
-  public Shoot_AndDriveOut() {
+public class Shoot_DriveOut_Far extends SequentialCommandGroup {
+  /** Creates a new Shoot_DriveOut_Far. */
+  public Shoot_DriveOut_Far() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     Command shoot = new Launcher_SetPower(0.8);
     Command sendNote = new Intake_SetPower(-0.4);
-    Command drive = new Drivetrain_GyroStraight(-1.21, 0.8, 0);
+    Command drive = new Drivetrain_GyroStraight(3, 0.8, 0);
     Command wait = new WaitCommand(2);
     Command stopMotors = new SequentialCommandGroup(new Launcher_SetPower(0), new Intake_SetPower(0));
     

@@ -113,6 +113,10 @@ public class Drivetrain extends SubsystemBase {
 	public Pose2d getPose() {
 		return odometry.getPoseMeters();
 	}
+
+	public void resetPose(Pose2d pose){
+		// odometry.resetPosition(gyroscope.getRotation2d(),getPo,pose);
+	}
 	public SwerveDriveKinematics getkDriveKinematics() {
 		return kDriveKinematics;	
 	}

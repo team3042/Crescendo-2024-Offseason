@@ -83,6 +83,7 @@ public class RobotMap {
 	public static final double flipSpeed = 0.4;
 	public static final double intakeSpeed = 0.4;
 	public static final double flipperThreshold = 100;
+	public static final double flipperOutPos = 2050;
 
 	/** Shooter Subsystem Settings */
 
