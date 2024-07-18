@@ -38,10 +38,14 @@ public class Launcher extends SubsystemBase {
   }
 
   public void startShooter(double speed) {
-    // Robot.intake.flipIntakeUp();
-    // Robot.intake.shooterIntakeSpin();
+    
     leftShooterMotor.set(speed);
     rightShooterMotor.set(speed);
+  }
+
+  public void startShooterAuto() {
+    leftShooterMotor.set(0.8);
+    rightShooterMotor.set(0.8);
   }
 
   public void stopShooter() {

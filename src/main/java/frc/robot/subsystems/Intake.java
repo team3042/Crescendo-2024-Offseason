@@ -87,6 +87,13 @@ public class Intake extends SubsystemBase {
     intakeMotor.set(speed);
   }
 
+  public void intakeSpinOutAuto() {
+    intakeMotor.set(0.8);
+  }
+
+  public void intakeSpinInAuto() {
+    intakeMotor.set(-1);
+  }
 
   public void setFlipperPower(double power){
   

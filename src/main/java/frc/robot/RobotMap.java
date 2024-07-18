@@ -83,7 +83,7 @@ public class RobotMap {
 	public static final double flipSpeed = 0.4;
 	public static final double intakeSpeed = 0.4;
 	public static final double flipperThreshold = 100;
-	public static final double flipperOutPos = 2050;
+	public static final double flipperOutPos = 2250;
 
 	/** Shooter Subsystem Settings */
 
@@ -98,7 +98,7 @@ public class RobotMap {
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.07;
-	public static final double ANGLE_TOLERANCE = 2.0;
+	public static final double ANGLE_TOLERANCE = 5.0;
 	
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
