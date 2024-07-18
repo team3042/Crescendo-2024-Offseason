@@ -13,8 +13,6 @@ import frc.robot.commands.Move_Climber_Down;
 import frc.robot.commands.Move_Climber_Up;
 import frc.robot.commands.Reset_Flipper;
 import frc.robot.commands.Zero_Climber;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.GenericHID;
 // import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -62,7 +60,7 @@ public class OI {
 		new Trigger(() -> driverController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new InstantCommand(() -> toggleScale())); // SlowMode command
 	
 		/* Intake actions */
-		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(2300));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.RIGHT_BUMPER)).onTrue(new Flipper_SetPosition(RobotMap.flipperOutPos));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.LEFT_BUMPER)).onTrue(new Flipper_SetPosition(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onTrue(new Intake_SetPower(1));//0.6
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.A_BUTTON)).onFalse(new Intake_SetPower(0) );
@@ -74,8 +72,8 @@ public class OI {
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onTrue(new Launcher_SetPower(0.8)); // for speaker
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.B_BUTTON)).onFalse(new Launcher_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onTrue(new Launcher_SetPower(0.3));
-		// new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Launcher_SetPower(-0.2));
-		// new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Launcher_SetPower(0));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onTrue(new Launcher_SetPower(-0.2));
+		new Trigger(() -> gunnerController.getRawButton(RobotMap.PREV_BUTTON)).onFalse(new Launcher_SetPower(0));
 		new Trigger(() -> gunnerController.getRawButton(RobotMap.X_BUTTON)).onFalse(new Launcher_SetPower(0));
 
 	/*Climber actions */

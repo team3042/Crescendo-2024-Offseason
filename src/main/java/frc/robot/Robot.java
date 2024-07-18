@@ -15,7 +15,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.Log;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.Move_Climber_Up;
 import frc.robot.commands.autonomous.Autonomous_Default;
+import frc.robot.commands.autonomous.ShootTwiceFar;
+import frc.robot.commands.autonomous.ShootTwiceNear;
+import frc.robot.commands.autonomous.Shoot_AndDriveOut_Near;
+import frc.robot.commands.autonomous.Shoot_DriveOut_Far;
 import frc.robot.commands.autonomous.Short_LeaveZone;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -50,13 +55,20 @@ public class Robot extends TimedRobot {
 
     drivetrain.zeroGyro();
     climber.resetEncoders();
+    // while(climber.getLeftClimberCounts() <= 2500){  <-- HAVE NOT TESTED, scared
+    //   climber.moveClimberUp(0.5);
+    // }
     //TODO: reset encoders for all subsystems
+    intake.resetEncoders();
 
 
     /* Autonomous Routines */
 
-    chooser.setDefaultOption("Default", new Autonomous_Default());
-    chooser.setDefaultOption("Short_LeaveZone", new Short_LeaveZone());
+    chooser.setDefaultOption("Drive Out", new Autonomous_Default());
+    chooser.addOption("Shoot And Drive Out Short", new Shoot_AndDriveOut_Near());
+    chooser.addOption("Shoot And Drive Out Far", new Shoot_DriveOut_Far());
+    chooser.addOption("Shoot Twice Short", new ShootTwiceNear());
+    // chooser.addOption("Shoot Twice Far", new ShootTwiceFar());
     //add more auto options here
     SmartDashboard.putData(chooser);
 
@@ -68,6 +80,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    SmartDashboard.putBoolean("Intake Limit Switch", Robot.intake.intakeLimitSwitch.get());
+    SmartDashboard.putBoolean("Flip Limit Switch", Robot.intake.flipLimitSwitch.get());
+
   }
 
   @Override

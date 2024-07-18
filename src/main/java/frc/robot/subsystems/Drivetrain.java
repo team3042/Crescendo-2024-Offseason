@@ -5,10 +5,10 @@ import frc.robot.RobotMap;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+// import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SPI;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -112,6 +112,10 @@ public class Drivetrain extends SubsystemBase {
 	}
 	public Pose2d getPose() {
 		return odometry.getPoseMeters();
+	}
+
+	public void resetPose(Pose2d pose){
+		// odometry.resetPosition(gyroscope.getRotation2d(),getPo,pose);
 	}
 	public SwerveDriveKinematics getkDriveKinematics() {
 		return kDriveKinematics;	

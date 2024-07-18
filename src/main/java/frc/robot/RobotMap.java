@@ -10,8 +10,8 @@ public class RobotMap {
 
 	/** CAN ID numbers ********************************************************/
 	
-    public static final int kLeftShooterMotorPort = 19; //TODO: Find out how to connect and use pwm for motor
-    public static final int kRightShooterMotorPort = 20; //TODO: Find out how to connect and use pwm for motor
+    public static final int kLeftShooterMotorPort = 19;
+    public static final int kRightShooterMotorPort = 20;
 	public static final int kFrontLeftDriveAbsoluteEncoderPort = 1;
 	public static final int kFrontRightDriveAbsoluteEncoderPort = 2;
 	public static final int kBackLeftDriveAbsoluteEncoderPort = 3;
@@ -83,6 +83,7 @@ public class RobotMap {
 	public static final double flipSpeed = 0.4;
 	public static final double intakeSpeed = 0.4;
 	public static final double flipperThreshold = 100;
+	public static final double flipperOutPos = 2250;
 
 	/** Shooter Subsystem Settings */
 
@@ -97,7 +98,7 @@ public class RobotMap {
 
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.07;
-	public static final double ANGLE_TOLERANCE = 2.0;
+	public static final double ANGLE_TOLERANCE = 5.0;
 	
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
@@ -138,8 +139,6 @@ public class RobotMap {
     public static final int RIGHT_TRIGGER_AXIS = 3;
     public static final int PREV_BUTTON = 7;
     public static final int START_BUTTON = 8;
-	public static final int DPAD_UP = 9; //TODO: Find number
-	public static final int DPAD_DOWN = 11; //TODO: Find number
 
 	
 }

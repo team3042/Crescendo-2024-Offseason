@@ -13,6 +13,7 @@ public class Flipper_SetPosition extends Command {
 
   public double FlipperGoal;
   public double FlipPositionError;
+  public boolean flipGoalReached;
 
   /** Creates a new Flipper_SetPosition. */
   public Flipper_SetPosition(double flipperGoal) {
@@ -31,7 +32,7 @@ public class Flipper_SetPosition extends Command {
   public void execute() {
 
     FlipPositionError = FlipperGoal - Robot.intake.getFlipMotorPosition();
-    boolean flipGoalReached = Math.abs(FlipPositionError) < RobotMap.flipperThreshold;
+    flipGoalReached = Math.abs(FlipPositionError) < RobotMap.flipperThreshold;
     
     if(flipGoalReached){
       Robot.intake.setFlipperPower(0);
@@ -39,7 +40,7 @@ public class Flipper_SetPosition extends Command {
 
       Robot.intake.setFlipperPower(0);
     } else {
-      Robot.intake.setFlipperPower(Math.copySign(0.5, FlipPositionError));
+      Robot.intake.setFlipperPower(Math.copySign(0.4, FlipPositionError));
     }
 
     SmartDashboard.putNumber("Flipper Position Goal: ", FlipperGoal);
@@ -54,6 +55,6 @@ public class Flipper_SetPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return flipGoalReached;
   }
 }

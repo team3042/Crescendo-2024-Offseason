@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.RobotMap;
 
 import frc.lib.Log;
@@ -55,7 +54,7 @@ public class Log {
 	 * Return the current date and time as a String following the input formatting string.
 	 * String format : A parameterized string used by SimpleDateFormat to format the date and time. */
 	static private String formatDateTime(String format) {	
-		Date now = new Date(0);//TODO: Don't know if this is right, check if causes problems!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		Date now = new Date(0);
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 		formatter.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
 		return formatter.format(now);

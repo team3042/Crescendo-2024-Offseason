@@ -7,14 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class Move_Climber_Down extends Command {
+public class Roller_On extends Command {
 
-  double Power;
-  /** Creates a new Climber_SetPosition. */
-  public Move_Climber_Down(double power) {
+  double power;
+  /** Creates a new Roller_On. */
+  public Roller_On(double pow) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.climber);
-    Power = power;
+    addRequirements(Robot.intake);
+    power = pow;
   }
 
   // Called when the command is initially scheduled.
@@ -24,15 +24,7 @@ public class Move_Climber_Down extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(Power <= 0 && (Robot.climber.getLeftClimberCounts() <= 5 && Robot.climber.getRightClimberCounts() <= 5)){
-
-      Robot.climber.moveClimberDown(0);
-    } else {
-
-      Robot.climber.moveClimberDown(Power);
-    }
-
+    Robot.intake.intakeSpin(power);
   }
 
   // Called once the command ends or is interrupted.

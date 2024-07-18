@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Launcher extends SubsystemBase {
@@ -29,8 +28,8 @@ public class Launcher extends SubsystemBase {
     leftShooterMotor.setInverted(RobotMap.intakeMotorReversed);
     rightShooterMotor.setInverted(RobotMap.flipMotorReversed);
 
-    leftShooterMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCOast or kBrake affect shooter power
-    rightShooterMotor.setIdleMode(IdleMode.kBrake); //TODO: check if kCOast or kBrake affect shooter power
+    leftShooterMotor.setIdleMode(IdleMode.kBrake);
+    rightShooterMotor.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
@@ -39,10 +38,14 @@ public class Launcher extends SubsystemBase {
   }
 
   public void startShooter(double speed) {
-    // Robot.intake.flipIntakeUp();
-    // Robot.intake.shooterIntakeSpin();
+    
     leftShooterMotor.set(speed);
     rightShooterMotor.set(speed);
+  }
+
+  public void startShooterAuto() {
+    leftShooterMotor.set(0.8);
+    rightShooterMotor.set(0.8);
   }
 
   public void stopShooter() {

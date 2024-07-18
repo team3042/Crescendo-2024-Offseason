@@ -124,7 +124,7 @@ public class SwerveModule {
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     }
 
-    // Set 0% power to both motors
+    // Set 0% power to both motors 
     public void stop() {
         driveMotor.set(0);
         turningMotor.set(0);
