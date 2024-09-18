@@ -1,10 +1,10 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.RobotMap;
 
@@ -12,6 +12,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase.MotorType;
 
 public class SwerveModule {
 
@@ -28,7 +29,7 @@ public class SwerveModule {
 
     private final PIDController turningPidController;
 
-    private final CANCoder absoluteEncoder;
+    final CANcoder absoluteEncoder = new CANcoder(0);
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetDegrees;
 
@@ -38,12 +39,13 @@ public class SwerveModule {
 
         this.absoluteEncoderOffsetDegrees = absoluteEncoderOffset;
         this.absoluteEncoderReversed = absoluteEncoderReversed;
-        absoluteEncoder = new CANCoder(absoluteEncoderId);
+        //absoluteEncoder = new CANcoder(absoluteEncoderId); // commented to allow code to compile; not working bc of phoenix 6 switch
+        final CANcoderConfiguration absoluteCancoderConfig = new CANcoderConfiguration();
 
-        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
+        //absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees); // commented to allow code to compile; not working bc of phoenix 6 switch
 
-        driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
-        turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
+        driveMotor = null; //new CANSparkMax(driveMotorId, MotorType.kBrushless); // commented to allow code to compile; not working bc of phoenix 6 switch
+        turningMotor = null; //new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
         driveMotor.restoreFactoryDefaults();
         turningMotor.restoreFactoryDefaults();
@@ -91,7 +93,7 @@ public class SwerveModule {
 
     // Get the absolute position of the module in radians
     public double getAbsoluteEncoderRadians() {
-        double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
+        double angle = 0;absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees, // commented to allow code to compile; not working bc of phoenix 6 switch
         angle *= (Math.PI / 180); // Convert degrees to radians
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
