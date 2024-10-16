@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": null
+            "pathName": "Test Path"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "Test Auto",
   "choreoAuto": false
 }
