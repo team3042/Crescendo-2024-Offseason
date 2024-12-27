@@ -30,7 +30,7 @@ import frc.robot.subsystems.Launcher;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private static final Log.Level LOG_LEVEL = RobotMap.LOG_ROBOT;
+  private static final Log.Level LOG_LEVEL = Constants.LOG_ROBOT;
 	private Log log = new Log(LOG_LEVEL, "Robot");
 
 
